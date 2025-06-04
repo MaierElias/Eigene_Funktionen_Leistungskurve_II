@@ -3,7 +3,7 @@ name = "eigene_funktionen_leistungskurve_II"
 version = "0.1.0"
 description = "Default template for PDM package"
 authors = [
-    {name = "MaierElias, MayrJulius", email = "me7770@mci4me.at"},
+    {name = "MaierElias, juliusmayr", email = "me7770@mci4me.at, mj4127@mci4me.at"},
 ]
 dependencies = ["numpy>=2.2.6", "pandas>=2.2.3", "plotly>=6.1.2", "jupyter>=1.1.1"]
 requires-python = "==3.13.*"
