@@ -14,7 +14,7 @@ print(power_duration)
 
 # %%
 #Diagramm erstellen
-fig = px.bar(power_duration, x='Duration', y='PowerOriginal',
+fig = px.scatter(power_duration, x='Duration', y='PowerOriginal',
              labels={'PowerOriginal': 'Power [W]', 'Duration': 'Zeit [s]'},
              title='Verbrachte Zeit pro Power-Stufe')
 fig.show()
