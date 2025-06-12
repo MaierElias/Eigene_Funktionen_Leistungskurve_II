@@ -34,7 +34,11 @@ fig.update_layout(
     xaxis_title='Dauer [min]',
     yaxis_title='Leistung [W]',
     title='Leistungskurve (Power Duration Curve)',
-    xaxis_type='log'
+    xaxis_type='log',
+    xaxis=dict(
+        tickvals=[0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20],
+        ticktext=['0.02', '0.05', '0.1', '0.2', '0.5', '1', '2', '5', '10', '20']
+    )
 )
 fig.show()
 
