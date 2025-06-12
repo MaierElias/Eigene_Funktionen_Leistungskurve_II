@@ -4,9 +4,6 @@ import plotly.graph_objects as go
 
 from functions import create_table, create_leistungskurve
 
-# numpy_array = input("Wenn Sie einen NumPy-Array auswerten möchte eben Sie bitte den Pfad zur NumPy-Array-Datei ein: ")
-
-
 
 input_data = input("Bitte geben Sie den Pfad zur auszuwertenden Datei ein (CSV oder NumPy-Array): ")
 print("Eingabe:", input_data)
@@ -24,6 +21,5 @@ if ask_for_plot == "ja":
     print("Die Leistungskurve wird jetzt erstellt...")
     create_leistungskurve(created_table)
     fig.show(renderer='browser') # Anzeige im Browser
-
 else: 
     print("Vielen Dank für die Nutzung des Programms!")
