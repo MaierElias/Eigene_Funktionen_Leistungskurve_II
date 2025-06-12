@@ -61,15 +61,17 @@ def create_leistungskurve(df_select):
             ticktext=['0.02', '0.05', '0.1', '0.2', '0.5', '1', '2', '5', '10', '20']
         )
     )
-    fig.show(renderer='browser') # Anzeige im Browser
-
-    return fig
+    
+    df = pd.DataFrame({"durations": durations, "max_powers": max_powers})
+    print(df)
+    return df, fig
 
 if __name__ == "__main__":
     input_data = 'data/activity.csv'
-    df = pd.read_csv(input_data)
-    print(int(df["Duration"].mean()))
+    dc = pd.read_csv(input_data)
+    print(int(dc["Duration"].mean()))
   
     print(create_table(input_data))
     print(create_table(input_data))
     create_leistungskurve(create_table(input_data))
+    print(df)

@@ -13,9 +13,16 @@ print("Eingabe:", input_data)
 
 created_table = create_table(input_data)
 
-ask_for_table = input("Möchten Sie die Tabelle anzeigen? (ja/nein): ").strip().lower()
-if ask_for_table == "ja":
-    print(created_table)
+ask_for_dataframe = input("Möchten Sie die den Dataframe anzeigen? (ja/nein): ").strip().lower()
+if ask_for_dataframe == "ja":
+    df, fig = create_leistungskurve(created_table)
+    print(df)
 
-create_leistungskurve(created_table)
+ask_for_plot = input("Möchten Sie die Leistungskurve plotten? (ja/nein): ").strip().lower()
+if ask_for_plot == "ja":
+    print("Die Leistungskurve wird jetzt erstellt...")
+    create_leistungskurve(created_table)
+    fig.show(renderer='browser') # Anzeige im Browser
 
+else: 
+    print("Vielen Dank für die Nutzung des Programms!")
