@@ -24,6 +24,7 @@ def create_table(input_data):
         return df_select
     else:
         print("Ungültiger Dateityp oder Dateipfad.")
+        print("\033[31mBitte brechen Sie das Programm mit Strg+C ab und starten Sie es erneut mit pdm run main.py.\033[0m")
         return None
     
 
@@ -46,6 +47,27 @@ def create_leistungskurve(df_select):
             durations.append(window)
             max_powers.append(max_power)
 
+    max_minutes = max_duration / 60
+    tickvals = []
+    base_ticks = [2, 5, 10]
+    exp = -2  # Start bei 10^-2 = 0,01
+    while True:
+        for b in base_ticks:
+            tick = b * (10 ** exp)
+            if tick < 0.02:
+                continue
+            if tick > max_minutes:
+                break
+            tickvals.append(tick)
+        if tick > max_minutes:
+            break
+        exp += 1
+
+    ticktext = [
+        f"{int(v*60)} s" if v < 1 else f"{round(v, 2)} min"
+        for v in tickvals
+    ]
+
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=np.array(durations) /60, # Umwandlung von Sekunden in Minuten 
                             y=max_powers,
@@ -57,21 +79,17 @@ def create_leistungskurve(df_select):
         title='Leistungskurve (Power Duration Curve)',
         xaxis_type='log',
         xaxis=dict(
-            tickvals=[0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20],
-            ticktext=['0.02', '0.05', '0.1', '0.2', '0.5', '1', '2', '5', '10', '20']
+            tickvals=tickvals,
+            ticktext=ticktext
         )
     )
     
     df = pd.DataFrame({"durations": durations, "max_powers": max_powers})
-    print(df)
+
     return df, fig
 
 if __name__ == "__main__":
     input_data = 'data/activity.csv'
-    dc = pd.read_csv(input_data)
-    print(int(dc["Duration"].mean()))
+    df, fig = create_leistungskurve(create_table(input_data))
+    fig.show(renderer='browser')  # Anzeige im Browser
   
-    print(create_table(input_data))
-    print(create_table(input_data))
-    create_leistungskurve(create_table(input_data))
-    print(df)
